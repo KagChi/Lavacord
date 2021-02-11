@@ -109,7 +109,7 @@ export class LavalinkNode {
 
             if (this.resumeKey) headers["Resume-Key"] = this.resumeKey;
 
-            const ws = new WebSocket(`ws://${this.host}:${this.port}/`, { headers });
+            const ws = new WebSocket(`wss://${this.host}:${this.port}/`, { headers });
 
             const onEvent = (event: unknown): void => {
                 ws.removeAllListeners();
