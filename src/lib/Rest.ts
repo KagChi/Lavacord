@@ -19,7 +19,7 @@ export class Rest {
         const params = new URLSearchParams();
         params.append("identifier", identifer);
 
-        return fetch(`http://${node.host}:${node.port}/loadtracks?${params}`, { headers: { Authorization: node.password } }).then(json);
+        return fetch(`https://${node.host}:${node.port}/loadtracks?${params}`, { headers: { Authorization: node.password } }).then(json);
     }
 
     /**
@@ -32,11 +32,11 @@ export class Rest {
     static decode(node: LavalinkNode, tracks: string | string[]): Promise<TrackData | TrackData[]>;
     static decode(node: LavalinkNode, tracks: string | string[]): Promise<TrackData | TrackData[]> {
         if (Array.isArray(tracks)) {
-            return fetch(`http://${node.host}:${node.port}/decodetracks`, { method: "POST", body: JSON.stringify(tracks), headers: { Authorization: node.password } }).then(json);
+            return fetch(`https://${node.host}:${node.port}/decodetracks`, { method: "POST", body: JSON.stringify(tracks), headers: { Authorization: node.password } }).then(json);
         } else {
             const params = new URLSearchParams();
             params.append("track", tracks);
-            return fetch(`http://${node.host}:${node.port}/decodetrack?${params}`, { headers: { Authorization: node.password } }).then(json);
+            return fetch(`https://${node.host}:${node.port}/decodetrack?${params}`, { headers: { Authorization: node.password } }).then(json);
         }
     }
 
@@ -45,7 +45,7 @@ export class Rest {
      * @param node The LavalinkNode
      */
     static routePlannerStatus(node: LavalinkNode): Promise<RoutePlannerStatus> {
-        return fetch(`http://${node.host}:${node.port}/routeplanner/status`, { headers: { Authorization: node.password } }).then(json);
+        return fetch(`https://${node.host}:${node.port}/routeplanner/status`, { headers: { Authorization: node.password } }).then(json);
     }
 
     /**
@@ -55,8 +55,8 @@ export class Rest {
      */
     static routePlannerUnmark(node: LavalinkNode, address?: string): Promise<any> {
         if (address) {
-            return fetch(`http://${node.host}:${node.port}/routeplanner/free/address`, { method: "POST", body: JSON.stringify({ address }), headers: { Authorization: node.password } }).then(json);
+            return fetch(`https://${node.host}:${node.port}/routeplanner/free/address`, { method: "POST", body: JSON.stringify({ address }), headers: { Authorization: node.password } }).then(json);
         }
-        return fetch(`http://${node.host}:${node.port}/routeplanner/free/all`, { method: "POST", headers: { Authorization: node.password } }).then(json);
+        return fetch(`https://${node.host}:${node.port}/routeplanner/free/all`, { method: "POST", headers: { Authorization: node.password } }).then(json);
     }
 }
